@@ -22,7 +22,7 @@ before_install:
   - gcloud auth activate-service-account --key-file service-account.json
   - gcloud config set project contacts-k8s-2589032
   - gcloud config set compute/zone us-central1
-  - gcloud container clusters get-credentials contacts-k8s
+  - gcloud container clusters get-credentials  contact-k8s
   - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
   
 
