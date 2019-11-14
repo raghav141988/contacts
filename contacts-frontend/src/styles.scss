@@ -1,0 +1,103 @@
+/* You can add global styles to this file, and also import other style files */
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+.font-size-10{
+    font-size:10px;
+}
+.font-size-11{
+    font-size:11px;
+}
+.font-size-12{
+font-size: 12px;  
+}
+.font-size-13{
+font-size: 13px;  
+}
+.font-size-14{
+font-size: 14px;  
+}
+.font-size-15{
+   font-size:15px;
+}
+.font-size-16{
+font-size:16px;
+}
+.font-size-18{
+font-size: 18px;  
+}  
+.font-size-30{
+   font-size:30px;
+}
+
+.color-black{
+   color:#000000;
+}
+.color-light-black{
+color:#333333;
+}
+.color-white{
+   color:#ffffff;
+}
+.color-red{
+color: #E91E63;
+}
+.color-grey{
+color:#666666;
+}
+.color-light-grey{
+   color:#999999;
+}
+.color-lightest-grey {
+   color: #AAAAAA;
+}
+.color-light-blue{
+   color:#3F51B5;
+}
+.color-blue{
+color:#536DFE;
+}
+
+// .icon-img-error-24-2x{
+//     content:url("./assets/outline-error_outline-24px@2x.png")              
+// }   
+// .icon-img-help-24-2x{
+//    content:url("./assets/outline-help_outline-24px@2x.png")   
+// }
+.outlined{
+font-family: 'Material icons outlined' !important;
+}
+.xsmall {
+width: 40px !important;
+padding-right: 10px;
+}
+.small {
+width: 120px !important;
+padding-right: 10px;
+} 
+.medium {
+width: 160px !important;
+padding-right: 10px;
+}
+.large {
+width: 200px !important;
+padding-right: 10px;
+}
+.xlarge {
+width: 220px !important;
+// width: auto !important;
+padding-right: 10px;
+}
+.material-icons {
+font-size: 24px ;
+
+}
+.size-48 {
+font-size: 48px  ; 
+}
+.success-snackbar {
+   // background: #1DE9B6 !important;
+}
+.error-snackbar {
+    background: #B00020 !important;
+}

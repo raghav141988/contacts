@@ -1,0 +1,40 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mango-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      component: mango-database
+  template:
+    metadata:
+      labels:
+        component: mango-database
+    spec:
+      volumes:
+        - name: mango-storage
+          persistentVolumeClaim:
+            claimName: mango-persistent-volume-claim
+      containers:
+        - name: database
+          image: mongo:4.0.0
+          command:
+          - /bin/bash
+          - -c
+          # mv is not needed for later versions e.g. 3.4.19 and 4.1.7
+          - mv /usr/bin/numactl /usr/bin/numactl1 && source docker-entrypoint.sh mongod
+          volumeMounts:
+            - name: mango-storage
+              mountPath: /data/db
+              
+          ports:
+            - containerPort: 27017
+          env:         
+            - name: MONGO_INITDB_ROOT_USERNAME
+              value: root
+            - name: MONGO_INITDB_ROOT_PASSWORD
+              valueFrom: 
+                secretKeyRef:
+                    name: mangopassword
+                    key:  MANGOPASSWORD

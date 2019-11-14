@@ -1,0 +1,30 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: 'contact-backend-deployment'
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      component: contacts-backend
+  template:
+    metadata:
+      labels:
+        component: contacts-backend
+    spec:
+        containers:
+          - name: contacts-api
+            image: raghav141988/contacts-backend
+            ports:
+              - containerPort: 8080
+            env: 
+              - name: MONGODB_HOST
+                value: contacts-mango-cluster-ip-service        
+              - name: MONGO_INITDB_ROOT_USERNAME
+                value: root
+              - name: MONGO_INITDB_ROOT_PASSWORD
+                valueFrom: 
+                  secretKeyRef:
+                    name: mangopassword
+                    key:  MANGOPASSWORD
+            

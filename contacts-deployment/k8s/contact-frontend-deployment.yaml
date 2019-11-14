@@ -1,0 +1,19 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: contact-frontend-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      component: contacts-frontend
+  template:
+    metadata:
+      labels:
+        component: contacts-frontend
+    spec:
+      containers:
+        - name: contacts-frontend
+          image: raghav141988/contacts-frontend
+          ports:
+            - containerPort: 4200

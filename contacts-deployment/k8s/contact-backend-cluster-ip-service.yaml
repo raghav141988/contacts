@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: contact-backend-server-cluster-ip
+spec:
+  type: ClusterIP
+  selector:
+    component: contacts-backend
+  ports:
+   - port: 8080
+     targetPort: 8080

@@ -1,0 +1,38 @@
+
+
+  
+  <div class="fab-button-deals">
+    <button (click)="openDialog()"  mat-fab   > <i  class="material-icons md-24" style="color:white" >add</i>    
+                                                                  
+                  </button>
+  
+    </div>
+  <mat-card *ngIf="contactList" class="container">
+   
+        <div class="content">
+         
+          <div class="list" >
+            <mat-card class="list-item" *ngFor="let item of contactList">
+              <div class="item-content" >    
+                <div class="item-select-top" [ngStyle]="{'visibility': selected && selected.id == item.id ? 'visible' : 'hidden'}"></div>
+                <div class="item-left-part font-size-12 color-white font-family-regular"><span > <i  class="material-icons size-48" style="color:black" >person</i> </span></div>
+                <div class="item-right-part">
+                  <div class="text-column line-height-19 font-size-15 color-black font-family-regular" [matTooltip]="item.name">{{item.name}}</div>
+                  <div class="text-column font-size-14 color-light-black font-family-light">{{item.phone}}</div>
+                  <div class="text-column font-size-14 color-light-black font-family-light" >{{item.email}}</div>
+                  <div class="item-address font-size-14 color-light-black font-family-light" >{{getCompleteAddress(item.address)}}</div>
+                </div>
+                
+              </div>
+              <div class="item-footer">
+                <div class="item-select-bottom" ></div>
+                <div class="item-more font-size-15 color-blue font-family-regular" (click)="edit(item)">EDIT</div>
+                <div class="item-more font-size-15 color-blue font-family-regular" (click)="delete(item)">DELETE  </div>
+                
+              </div>
+            </mat-card>      
+          </div>
+        </div>
+        
+    
+  </mat-card>

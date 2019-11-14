@@ -1,0 +1,46 @@
+<div class="form-container" *ngIf="!post;" novalidate> 
+    <form [formGroup]="formGroup" (ngSubmit)="onSubmit(formGroup.value)" #form class="form">
+            <mat-form-field class="form-element">
+                    <input matInput placeholder="Name" formControlName="name">
+                    <mat-error *ngIf="!name.valid && name.touched">
+                      {{ titleAlert }}
+                    </mat-error>
+                  </mat-form-field>
+      <mat-form-field class="form-element">
+        <input matInput placeholder="Email" formControlName="email">
+        <mat-error *ngIf="!formGroup.controls['email'].valid && formGroup.controls['email'].touched">
+          {{ getErrorEmail() }}
+        </mat-error>
+      </mat-form-field>
+  
+      <mat-form-field class="form-element">
+            <input matInput type="tel" placeholder="Phone Number" formControlName="phone">
+            <mat-error *ngIf="!formGroup.controls['phone'].valid && formGroup.controls['phone'].touched">
+              {{ getErrorEmail() }}
+            </mat-error>
+          </mat-form-field>
+  <div formGroupName="address">
+      <mat-form-field class="form-element">
+        <textarea matInput placeholder="Address Line 1" matTextareaAutosize matAutosizeMinRows="2" matAutosizeMaxRows="5" formControlName="line1"></textarea>
+        <mat-error *ngIf="!addressLine1.valid && addressLine1.touched">
+          Required field
+        </mat-error>
+      </mat-form-field>
+  
+     
+      <mat-form-field class="form-element">
+            <textarea matInput placeholder="Address Line 2" matTextareaAutosize matAutosizeMinRows="2" matAutosizeMaxRows="5" formControlName="line2"></textarea>
+           
+          </mat-form-field>
+   
+        </div>
+        <button mat-stroked-button  (click)="onNoClick()" class="editor-cancel-button" >CANCEL</button>
+       
+        <button   type="submit"  mat-stroked-button [disabled]="!formGroup.valid" class="editor-save-buton"  >SAVE </button>
+       
+    </form>
+  </div>
+  
+ 
+  
+ 
