@@ -21,8 +21,7 @@ before_install:
   - gcloud components update kubectl
   - gcloud auth activate-service-account --key-file service-account.json
   - gcloud config set project contacts-k8s-258903
-  - export CLOUDSDK_CONTAINER_USE_CLIENT_CERTIFICATE=True
-  - gcloud config set compute/zone us-central1-a
+  - gcloud config set compute/zone us-central1
   - gcloud container clusters get-credentials contact-k8s
   
   - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
