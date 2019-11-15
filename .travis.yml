@@ -26,7 +26,8 @@ before_install:
   
   - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
   
-
+script:
+  mvn -f contacts-backend/pom.xml clean install
 
 
 deploy:
