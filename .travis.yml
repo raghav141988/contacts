@@ -29,6 +29,7 @@ script:
   
   
 deploy:
+  skip_cleanup: true
   provider: script
   script: bash ./deploy.sh
   on:
