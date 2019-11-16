@@ -1,7 +1,7 @@
 #!/bin/sh
 
 
-cd $TRAVIS_BUILD_DIR/contacts-backend/
+cd $TRAVIS_BUILD_DIR/contacts-backend/target
 ls -l
 echo $PWD
 docker build -t raghav141988/contacts-backend:latest -t raghav141988/contacts-backend:$SHA -f ./Dockerfile .
