@@ -52,8 +52,8 @@ export class ContactListComponent implements OnInit {
         height: '650px'
       });
       dialogRef.afterClosed().subscribe(result => {
-        console.log('The dialog was closed');
-        if (result) {
+        console.log('The dialog was closed', result);
+        if (result !== null && result !== undefined) {
        this.addContact(result);
      }
       });
