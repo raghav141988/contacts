@@ -5,7 +5,9 @@ sudo: required
 jdk:
   - openjdk8
 
-
+cache:
+  directories:
+    - $HOME/.m2
 services:
   - docker
 env:
@@ -23,11 +25,12 @@ before_install:
   - gcloud container clusters get-credentials contacts-k8s
   
   - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
-before_script: cd contacts-backend
+  
 script:
-  mvn  clean install 
+  mvn -f contacts-backend/pom.xml clean install
 
-
+before_deploy:
+  cd $TRAVIS_BUILD_DIR
 deploy:
   provider: script
   script: bash ./deploy.sh
