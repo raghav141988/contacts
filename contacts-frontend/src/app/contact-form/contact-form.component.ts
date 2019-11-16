@@ -9,7 +9,7 @@ import { Observable } from 'rxjs';
     styleUrls: ['./contact-form.component.scss']
   })
   export class ContactFormComponent implements OnInit {
-    @Output() formStatusEvent =  new EventEmitter();
+
     @Output() formSubmitEvent =  new EventEmitter();
     // tslint:disable-next-line:no-input-rename
     @Input('contact') contact: Contact;
@@ -43,16 +43,7 @@ import { Observable } from 'rxjs';
 
         validate: ''
       });
-      this.formGroup.statusChanges.subscribe(status => {
 
-        this.formStatusEvent.emit({
-
-            status,
-            formGroup: this.formGroup
-
-        }
-        );
-      });
     }
 
     setChangeValidate() {
@@ -93,15 +84,20 @@ import { Observable } from 'rxjs';
         // tslint:disable-next-line:max-line-length
         this.formGroup.get('password').hasError('requirements') ? 'Password needs to be at least eight characters, one uppercase letter and one number' : '';
     }
-    onNoClick() {
-      this.formSubmitEvent.emit(null);
+    onNoClicked() {
+
+        this.formSubmitEvent.emit(null);
+
     }
     onSubmit(post) {
-     const data = {...post,
+      console.log('submit clicked', post);
+
+      const data = {...post,
                  id: this.contact ? this.contact.id : null
     };
+      this.formSubmitEvent.emit(data);
+  }
 
-     this.formSubmitEvent.emit(data);
-    }
+
 
 }

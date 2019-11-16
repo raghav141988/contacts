@@ -1,4 +1,4 @@
-<div class="form-container" *ngIf="!post;" novalidate> 
+<div class="form-container" *ngIf="!post;" validate> 
     <form [formGroup]="formGroup" (ngSubmit)="onSubmit(formGroup.value)" #form class="form">
             <mat-form-field class="form-element">
                     <input matInput placeholder="Name" formControlName="name">
@@ -34,7 +34,7 @@
           </mat-form-field>
    
         </div>
-        <button mat-stroked-button  (click)="onNoClick()" class="editor-cancel-button" >CANCEL</button>
+        <button mat-stroked-button (click)="onNoClicked();$event.preventDefault()"  class="editor-cancel-button" >CANCEL</button>
        
         <button   type="submit"  mat-stroked-button [disabled]="!formGroup.valid" class="editor-save-buton"  >SAVE </button>
        

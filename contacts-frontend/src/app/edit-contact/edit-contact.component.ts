@@ -4,7 +4,7 @@ import { Component, OnInit } from '@angular/core';
 import { slideInAnimation } from '../animation';
 import { Observable } from 'rxjs';
 import { switchMap } from 'rxjs/operators';
-import { ActivatedRoute,Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 import { Location } from '@angular/common';
 import { MatSnackBar } from '@angular/material/snack-bar';
@@ -35,12 +35,17 @@ export class EditContactComponent implements OnInit {
     });
   }
   onFormSave(contact: Contact) {
+    if (contact) {
     this.service.updateContact(contact).subscribe(() => {
       this.router.navigate(['/contact-list']);
       this.openSnackBar('Contact edit successful', 'success-snackbar');
     },
     (error) => this.openSnackBar(error, 'error-snackbar')
       );
+  } else {
+    this.router.navigate(['/contact-list']);
   }
+
+}
 
 }
