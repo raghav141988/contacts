@@ -53,7 +53,7 @@ steps:
     kubernetesServiceEndpoint: 'contactsServiceConnection'
     namespace: 'kube-system'
     command: 'apply'
-    arguments: '-f k8s'
+    arguments: '-f ./contacts-deployment/k8s'
     secretType: 'dockerRegistry'
     containerRegistryType: 'Container Registry'
     dockerRegistryEndpoint: 'Docker-raghav141988'
