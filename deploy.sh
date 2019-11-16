@@ -5,7 +5,7 @@ cd $TRAVIS_BUILD_DIR/contacts-backend
 for file in $PWD/*; do
     echo "$(basename "$file")"
 done
-echo $PWD
+
 docker build -t raghav141988/contacts-backend:latest -t raghav141988/contacts-backend:$SHA -f ./Dockerfile .
 cd $TRAVIS_BUILD_DIR
 ls -l
