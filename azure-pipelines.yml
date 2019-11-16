@@ -1,0 +1,80 @@
+# Node.js
+# Build a general Node.js project with npm.
+# Add steps that analyze code, save build artifacts, deploy, and more:
+# https://docs.microsoft.com/azure/devops/pipelines/languages/javascript
+
+# Starter pipeline
+# Start with a minimal pipeline that you can customize to build and deploy your code.
+# Add steps that build, run tests, deploy, and more:
+# https://aka.ms/yaml
+
+trigger:
+- master
+
+pool:
+  vmImage: 'ubuntu-latest'
+
+steps:
+
+- task: Maven@3
+  inputs:
+    mavenPomFile: 'contacts-backend/pom.xml'
+    goals: 'clean verify'
+    publishJUnitResults: false
+    javaHomeOption: 'JDKVersion'
+    mavenVersionOption: 'Default'
+    mavenAuthenticateFeed: false
+    effectivePomSkip: false
+    sonarQubeRunAnalysis: false
+
+- task: Docker@2
+  inputs:
+    containerRegistry: 'Docker-raghav141988'
+    repository: 'raghav141988/contacts-backend'
+    command: 'buildAndPush'
+    Dockerfile: './contacts-backend/Dockerfile'
+    buildContext: './contacts-backend'
+    tags: |
+      latest
+      $(Build.BuildId)
+- task: Docker@2
+  inputs:
+    containerRegistry: 'Docker-raghav141988'
+    repository: 'raghav141988/contacts-frontend'
+    command: 'buildAndPush'
+    Dockerfile: './contacts-frontend/Dockerfile'
+    buildContext: './contacts-frontend'
+    tags: |
+      latest
+      $(Build.BuildId)
+- task: Kubernetes@1
+  inputs:
+    connectionType: 'Kubernetes Service Connection'
+    kubernetesServiceEndpoint: 'contactsServiceConnection'
+    namespace: 'kube-system'
+    command: 'apply'
+    arguments: '-f k8s'
+    secretType: 'dockerRegistry'
+    containerRegistryType: 'Container Registry'
+    dockerRegistryEndpoint: 'Docker-raghav141988'
+    secretName: 'docker-secret'
+- task: Kubernetes@1
+  inputs:
+    connectionType: 'Kubernetes Service Connection'
+    kubernetesServiceEndpoint: 'contactsServiceConnection'
+    namespace: 'kube-system'
+    command: 'set'
+    arguments: 'image deployment/contact-frontend-deployment contacts-frontend=raghav141988/contacts-frontend:$(Build.BuildId)'
+    secretType: 'dockerRegistry'
+    containerRegistryType: 'Container Registry'
+    dockerRegistryEndpoint: 'Docker-raghav141988'
+- task: Kubernetes@1
+  inputs:
+    connectionType: 'Kubernetes Service Connection'
+    kubernetesServiceEndpoint: 'contactsServiceConnection'
+    namespace: 'kube-system'
+    command: 'set'
+    arguments: 'image deployment/contact-backend-deployment contacts-api=raghav141988/contacts-backend:$(Build.BuildId)'
+    secretType: 'dockerRegistry'
+    containerRegistryType: 'Container Registry'
+    dockerRegistryEndpoint: 'Docker-raghav141988'
