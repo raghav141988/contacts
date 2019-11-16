@@ -28,8 +28,7 @@ before_install:
   
 script:
   - mvn -f contacts-backend/pom.xml clean install
-  - docker build -t raghav141988/contacts-backend:latest -t raghav141988/contacts-backend:$SHA -f ./contacts-backend/Dockerfile ./contacts-backend
-
+  
 
 before_deploy:
   cd $TRAVIS_BUILD_DIR
