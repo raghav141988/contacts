@@ -1,7 +1,8 @@
 #!/bin/sh
 
 docker build -t raghav141988/contacts-frontend:latest -t raghav141988/contacts-frontend:$SHA -f ./contacts-frontend/Dockerfile ./contacts-frontend
-cd $TRAVIS_BUILD_DIR/contacts-backend
+cd $TRAVIS_BUILD_DIR/raghav141988/contacts/contacts-backend/
+echo $PWD
 docker build -t raghav141988/contacts-backend:latest -t raghav141988/contacts-backend:$SHA -f ./contacts-backend/Dockerfile ./contacts-backend
 
 docker push raghav141988/contacts-backend:latest
