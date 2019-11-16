@@ -1,5 +1,9 @@
 #!/bin/sh
 
+cd $TRAVIS_BUILD_DIR
+for file in $PWD/*; do
+    echo "$(basename "$file")"
+done
 
 cd $TRAVIS_BUILD_DIR/contacts-backend
 for file in $PWD/*; do
