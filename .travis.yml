@@ -27,7 +27,9 @@ before_install:
   - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
   
 script:
-  mvn -f contacts-backend/pom.xml clean install
+  - mvn -f contacts-backend/pom.xml clean install
+  - docker build -t raghav141988/contacts-backend:latest -t raghav141988/contacts-backend:$SHA -f ./contacts-backend/Dockerfile ./contacts-backend
+
 
 before_deploy:
   cd $TRAVIS_BUILD_DIR
