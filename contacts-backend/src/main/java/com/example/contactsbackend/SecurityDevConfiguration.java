@@ -26,7 +26,7 @@ public class SecurityDevConfiguration extends WebSecurityConfigurerAdapter {
 	        http.cors().and().csrf().disable();
 	        http.authorizeRequests()
             .antMatchers(HttpMethod.OPTIONS, "/**").permitAll();
-	        http.cors().configurationSource(request -> new CorsConfiguration(corsConfiguratione()).applyPermitDefaultValues());
+	        http.cors().configurationSource(request -> new CorsConfiguration(corsConfiguratione()));
 	    }
 	    
 	    
