@@ -13,28 +13,28 @@ public class ContactsService {
 
 	
 	@Autowired
-	ContactsRepository carRepository;
+	ContactsRepository contactRepository;
 
 	
 	public Iterable<Contact> findAll() {
-		return carRepository.findAll();
+		return contactRepository.findAll();
 	}
 
 	
 	public Contact save(Contact student) {
-		return carRepository.save(student);
+		return contactRepository.save(student);
 	}
 
 	
 	public Optional<Contact> findByID(String id) {
-		return carRepository.findById(id);
+		return contactRepository.findById(id);
 	}
 
 
 	public void delete(String id) {
 		Contact contact = new Contact();
 		contact.setId(id);
-      	carRepository.delete(contact);		
+		contactRepository.delete(contact);		
 	}
 
 
