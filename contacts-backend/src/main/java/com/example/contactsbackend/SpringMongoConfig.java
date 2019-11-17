@@ -52,7 +52,7 @@ public class SpringMongoConfig extends AbstractMongoClientConfiguration {
 		  String envPassword = System.getenv("MONGO_INITDB_ROOT_PASSWORD");
 		  
     	  log.info("MONGODB_HOST="+envHost);
-    	  log.info("MONGODB_PASSWORD="+envPassword);
+    	
     	String connectionString=  "mongodb://"+(envUserName==null?userName:envUserName)+":"+(envPassword==null?password:envPassword)+"@"+(envHost==null ? mongoHost : envHost)+ ":" + Integer.parseInt(mongoPort );
     	  log.info("connectionString="+connectionString);
 		return   MongoClients.create(connectionString);
@@ -60,7 +60,7 @@ public class SpringMongoConfig extends AbstractMongoClientConfiguration {
 
 	@Override
 	protected String getDatabaseName() {
-		// TODO Auto-generated method stub
+		
 		return mongoDB;
 	}
 }
