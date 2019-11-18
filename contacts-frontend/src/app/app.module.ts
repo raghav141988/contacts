@@ -12,7 +12,8 @@ import { ContactFormComponent } from './contact-form/contact-form.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { EditContactComponent } from './edit-contact/edit-contact.component';
 import { HeaderComponent } from './header/header.component';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { XSRFTokenInterceptor } from './xsrf-token-interceptor';
 
 @NgModule({
   declarations: [
@@ -30,6 +31,9 @@ import { HttpClientModule } from '@angular/common/http';
     MaterialModule,
     ReactiveFormsModule,
     HttpClientModule
+  ],
+  providers: [
+    {provide: HTTP_INTERCEPTORS, useClass : XSRFTokenInterceptor}
   ],
   entryComponents: [AddContactComponent],
 
