@@ -34,7 +34,7 @@ import { XSRFTokenInterceptor } from './xsrf-token-interceptor';
   ],
   entryComponents: [AddContactComponent],
 providers: [
-  { provide:  HTTP_INTERCEPTORS, useClass : XSRFTokenInterceptor}
+  { provide:  HTTP_INTERCEPTORS, useClass : XSRFTokenInterceptor, multi: true}
 ],
   bootstrap: [AppComponent]
 })
