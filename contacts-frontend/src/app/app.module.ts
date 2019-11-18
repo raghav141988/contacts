@@ -33,7 +33,7 @@ import { XSRFTokenInterceptor } from './xsrf-token-interceptor';
     HttpClientModule
   ],
   providers: [
-    {provide: HTTP_INTERCEPTORS, useClass : XSRFTokenInterceptor}
+    {provide: HTTP_INTERCEPTORS, useClass : XSRFTokenInterceptor, multi: true}
   ],
   entryComponents: [AddContactComponent],
 
