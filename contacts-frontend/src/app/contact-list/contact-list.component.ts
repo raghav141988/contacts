@@ -32,6 +32,7 @@ export class ContactListComponent implements OnInit {
 
   public location: any;
   public contactList = [];
+  public studentList = [];
   public option = '';
   public selected: any;
   public showProgressBar = false;
@@ -74,6 +75,10 @@ addContact(result: Contact) {
    this.service.getContacts().subscribe(contacts => this.contactList = contacts,
     error =>   this.openSnackBar(error, 'error-snackbar')
     );
+
+   this.service.getStudents().subscribe(contacts => this.studentList = contacts,
+      error =>   this.openSnackBar(error, 'error-snackbar')
+      );
   }
 
 

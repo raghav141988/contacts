@@ -18,8 +18,10 @@ const httpOptions = {
   providedIn: 'root'
 })
 export class ContactService {
+ 
   counter = 5;
-  contactsUrl = environment.contactAPI;  // URL to web api
+  contactsUrl = environment.contactAPI;
+  studentsUrl = environment.studentAPI;  // URL to web api
   private handleError: HandleError;
   // tslint:disable-next-line:variable-name
   private _editedContact: Contact;
@@ -37,7 +39,12 @@ export class ContactService {
    );
 
   }
-
+  getStudents() {
+    return this.http.get<Contact[]>(this.studentsUrl)
+    .pipe(
+      catchError(this.handleError('getContacts', []))
+    );
+  }
   constructor(private http: HttpClient,
               httpErrorHandler: HttpErrorHandler) {
       this.handleError = httpErrorHandler.createHandleError('HeroesService');

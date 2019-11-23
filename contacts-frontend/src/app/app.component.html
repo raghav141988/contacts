@@ -1,5 +1,19 @@
+
+ 
+
+<mat-card *ngIf="!isAuthenticated">
+  <mat-card-content>
+    <button mat-raised-button color="accent"
+            (click)="oktaAuth.loginRedirect()">Login
+    </button>
+  </mat-card-content>
+</mat-card>
+
 <div [@routeAnimation]="'animation'">
+  <ng-container > 
   <app-header></app-header>
   <router-outlet #routerOutlet="outlet"></router-outlet>
+</ng-container>
 </div>
+
 

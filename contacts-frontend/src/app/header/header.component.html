@@ -4,5 +4,9 @@
      <span class="font-family-bold font-size-20" style="color:rgba(255, 255, 255, 1)">Contacts App
      </span>
     </div>
-  
+    <span class="toolbar-spacer"></span>
+    <button mat-raised-button color="accent" *ngIf="isAuthenticated"
+          (click)="oktaAuth.logout()">Logout
+  </button>
+
    </mat-toolbar>

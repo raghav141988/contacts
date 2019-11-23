@@ -13,7 +13,7 @@ export class XSRFTokenInterceptor implements HttpInterceptor {
 
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
 
-         let requestMethod: string = req.method;
+       /*  let requestMethod: string = req.method;
          requestMethod = requestMethod.toLowerCase();
 
          if (requestMethod && (requestMethod === 'post' || requestMethod === 'delete' || requestMethod === 'put' )) {
@@ -24,7 +24,7 @@ export class XSRFTokenInterceptor implements HttpInterceptor {
                req = req.clone({ headers: req.headers.set(headerName, token) });
              }
           }
-
+*/
          return next.handle(req);
        }
 }

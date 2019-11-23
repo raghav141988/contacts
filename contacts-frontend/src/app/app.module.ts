@@ -1,3 +1,4 @@
+import { AuthInterceptor } from './auth.interceptor';
 import { ContactService } from './contact.service';
 import { MaterialModule } from './material.module';
 import { BrowserModule } from '@angular/platform-browser';
@@ -14,6 +15,14 @@ import { EditContactComponent } from './edit-contact/edit-contact.component';
 import { HeaderComponent } from './header/header.component';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { XSRFTokenInterceptor } from './xsrf-token-interceptor';
+import { OktaAuthModule } from '@okta/okta-angular';
+
+const config = {
+  issuer: 'https://dev-490248.okta.com/oauth2/default',
+  redirectUri: 'http://localhost:4200/implicit/callback',
+  clientId: '0oa1wpluam12WEjEA357'
+};
+
 
 @NgModule({
   declarations: [
@@ -26,6 +35,7 @@ import { XSRFTokenInterceptor } from './xsrf-token-interceptor';
   ],
   imports: [
     BrowserModule,
+    OktaAuthModule.initAuth(config),
     AppRoutingModule,
     BrowserAnimationsModule,
     MaterialModule,
@@ -33,7 +43,8 @@ import { XSRFTokenInterceptor } from './xsrf-token-interceptor';
     HttpClientModule
   ],
   providers: [
-    {provide: HTTP_INTERCEPTORS, useClass : XSRFTokenInterceptor, multi: true}
+    {provide: HTTP_INTERCEPTORS, useClass : XSRFTokenInterceptor, multi: true},
+    {provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true}
   ],
   entryComponents: [AddContactComponent],
 
