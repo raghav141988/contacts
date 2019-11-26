@@ -18,13 +18,15 @@ export class AuthInterceptor implements HttpInterceptor {
     // Also, Giphy's API fails when the request includes a token.
     // if (request.urlWithParams.indexOf('localhost') > -1) {
       const accessToken = await this.oktaAuth.getAccessToken();
+     // const accessCode =await this.oktaAuth.get
       console.log(accessToken);
+      if ( accessToken) {
       request = request.clone({
         setHeaders: {
           Authorization: 'Bearer ' + accessToken
         }
       });
-   // }
+   }
       return next.handle(request).toPromise();
    }
 }

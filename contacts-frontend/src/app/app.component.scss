@@ -283,5 +283,41 @@
       visibility: hidden;
     }
   }
-
+//This is temporary
+  body {
+    padding: 0;
+    margin: 0;
+    min-height: 100vh;
+    font-family: arial, sans-serif;
+  }
+  @media(max-width: 400px) {
+    body {
+      padding: 10px;
+    }
+  }
+  .full-height {
+    min-height: 100vh;
+  }
+  .flex-center {
+    align-items: center;
+    display: flex;
+    justify-content: center;
+  }
+  .content {
+    max-width: 400px;
+  }
+  h2 {
+    text-align: center;
+  }
+  .code {
+    font-family: "Courier New", "Courier", monospace;
+    width: 100%;
+    padding: 4px;
+    border: 1px #ccc solid;
+    border-radius: 4px;
+    word-break: break-all;
+  }
+  .hidden {
+   // display: none;
+  }
  

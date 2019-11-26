@@ -1,19 +1,33 @@
 
  
 
-<mat-card *ngIf="!isAuthenticated">
-  <mat-card-content>
-    <button mat-raised-button color="accent"
-            (click)="oktaAuth.loginRedirect()">Login
-    </button>
-  </mat-card-content>
-</mat-card>
 
-<div [@routeAnimation]="'animation'">
-  <ng-container > 
+
+<!-- <div [@routeAnimation]="'animation'">
+  
   <app-header></app-header>
+  <mat-card *ngIf="!isAuthenticated">
+      <mat-card-content>
+        <button mat-raised-button color="accent"
+                (click)="oktaAuth.loginRedirect()">Login
+        </button>
+      </mat-card-content>
+    </mat-card>
   <router-outlet #routerOutlet="outlet"></router-outlet>
-</ng-container>
+
+</div> -->
+
+
+<div class="flex-center full-height">
+  <div class="content">
+      <a href="#"  (click)="login()" id="start">Click to Sign In</a>
+      <div id="token" class="hidden">
+          <h2>Access Token</h2>
+          <div *ngIf="accessToken" id="access_token" class="code">{{accessToken}}</div>
+      </div>
+      <div id="error" class="hidden">
+          <h2>Error</h2>
+          <div  *ngIf="error"  id="error_details" class="code">{{error}}</div>
+      </div>
+  </div>
 </div>
-
-

@@ -1,5 +1,5 @@
 
-
+<ng-container *ngIf="isAuthenticated">
   
   <div class="fab-button-deals">
     <button (click)="openDialog()"  mat-fab   > <i  class="material-icons md-24" style="color:white" >add</i>    
@@ -67,3 +67,4 @@
       
   
 </mat-card>
+</ng-container>

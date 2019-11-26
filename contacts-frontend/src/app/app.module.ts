@@ -15,12 +15,15 @@ import { EditContactComponent } from './edit-contact/edit-contact.component';
 import { HeaderComponent } from './header/header.component';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { XSRFTokenInterceptor } from './xsrf-token-interceptor';
-import { OktaAuthModule } from '@okta/okta-angular';
+import {
+  OKTA_CONFIG,
+  OktaAuthModule
+} from '@okta/okta-angular';
 
 const config = {
   issuer: 'https://dev-490248.okta.com/oauth2/default',
   redirectUri: 'http://localhost:4200/implicit/callback',
-  clientId: '0oa1wpluam12WEjEA357'
+  clientId: '0oa1mh1ffssvSTbch357'
 };
 
 
@@ -35,7 +38,7 @@ const config = {
   ],
   imports: [
     BrowserModule,
-    OktaAuthModule.initAuth(config),
+    OktaAuthModule,
     AppRoutingModule,
     BrowserAnimationsModule,
     MaterialModule,
@@ -44,7 +47,8 @@ const config = {
   ],
   providers: [
     {provide: HTTP_INTERCEPTORS, useClass : XSRFTokenInterceptor, multi: true},
-    {provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true}
+    {provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true},
+    { provide: OKTA_CONFIG, useValue: config }
   ],
   entryComponents: [AddContactComponent],
 
