@@ -5,8 +5,7 @@
      </span>
     </div>
     <span class="toolbar-spacer"></span>
-    <button mat-raised-button color="accent" *ngIf="isAuthenticated"
-          (click)="oktaAuth.logout()">Logout
-  </button>
+    <i *ngIf="isAuthenticated" class="material-icons size-36" (click)="oktaAuth.logout()" style="color:white" >exit_to_app</i> 
+   
 
    </mat-toolbar>

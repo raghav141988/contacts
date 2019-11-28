@@ -19,7 +19,7 @@ export class AuthInterceptor implements HttpInterceptor {
     // if (request.urlWithParams.indexOf('localhost') > -1) {
       const accessToken = await this.oktaAuth.getAccessToken();
      // const accessCode =await this.oktaAuth.get
-      console.log(accessToken);
+
       if ( accessToken) {
       request = request.clone({
         setHeaders: {

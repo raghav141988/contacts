@@ -18,10 +18,6 @@ const httpOptions = {
   providedIn: 'root'
 })
 export class AppService {
-
-
-
-  private handleError: HandleError;
   // tslint:disable-next-line:variable-name
 
 
@@ -30,6 +26,16 @@ export class AppService {
       this.handleError = httpErrorHandler.createHandleError('HeroesService');
 
      }
+
+
+
+  private handleError: HandleError;
+  getAccessCode(url: string): Observable<any> {
+    return this.http.get<any>(url)
+    .pipe(
+      catchError(this.handleError('addContact'))
+    );
+  }
 
 
   getToken(url: string, data: any): Observable<any> {
@@ -43,6 +49,6 @@ export class AppService {
       catchError(this.handleError('addContact'))
     );
   }
- 
-  
+
+
 }

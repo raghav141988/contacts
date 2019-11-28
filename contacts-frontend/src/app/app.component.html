@@ -3,7 +3,7 @@
 
 
 
-<!-- <div [@routeAnimation]="'animation'">
+ <div >
   
   <app-header></app-header>
   <mat-card *ngIf="!isAuthenticated">
@@ -13,14 +13,19 @@
         </button>
       </mat-card-content>
     </mat-card>
-  <router-outlet #routerOutlet="outlet"></router-outlet>
+   
+</div>  
 
-</div> -->
+<router-outlet #routerOutlet="outlet"></router-outlet>
+ 
+
+   
 
 
-<div class="flex-center full-height">
+
+<!-- <div class="flex-center full-height">
   <div class="content">
-      <a href="#"  (click)="login()" id="start">Click to Sign In</a>
+      <a   (click)="loginSilent($event);$event.stopPropagation()" id="start">Click to Sign In</a>
       <div id="token" class="hidden">
           <h2>Access Token</h2>
           <div *ngIf="accessToken" id="access_token" class="code">{{accessToken}}</div>
@@ -30,4 +35,4 @@
           <div  *ngIf="error"  id="error_details" class="code">{{error}}</div>
       </div>
   </div>
-</div>
+</div> -->

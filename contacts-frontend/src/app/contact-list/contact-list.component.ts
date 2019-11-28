@@ -1,3 +1,4 @@
+import { OktaAuthService } from '@okta/okta-angular';
 import { ContactService } from './../contact.service';
 import { AddContactComponent } from './../add-contact/add-contact.component';
 import { Component, OnInit, Inject, ViewChild } from '@angular/core';
@@ -28,7 +29,7 @@ export interface Address {
   animations:  [ slideInAnimation ]
 })
 export class ContactListComponent implements OnInit {
-
+  isAuthenticated: boolean;
 
   public location: any;
   public contactList = [];
@@ -37,7 +38,10 @@ export class ContactListComponent implements OnInit {
   public selected: any;
   public showProgressBar = false;
 
-  constructor(public dialog: MatDialog, private service: ContactService, private router: Router,
+  constructor(public dialog: MatDialog,
+              public oktaAuth: OktaAuthService,
+
+              private service: ContactService, private router: Router,
               // tslint:disable-next-line:variable-name
               private _snackBar: MatSnackBar
     ) { }
@@ -71,14 +75,16 @@ addContact(result: Contact) {
     error => this.openSnackBar(error, 'error-snackbar' )
     );
 }
-  ngOnInit() {
+  async ngOnInit() {
    this.service.getContacts().subscribe(contacts => this.contactList = contacts,
     error =>   this.openSnackBar(error, 'error-snackbar')
     );
+   this.isAuthenticated = await this.oktaAuth.isAuthenticated();
+    // Subscribe to authentication state changes
+   this.oktaAuth.$authenticationState.subscribe(
+      (isAuthenticated: boolean)  => this.isAuthenticated = isAuthenticated
+    );
 
-   this.service.getStudents().subscribe(contacts => this.studentList = contacts,
-      error =>   this.openSnackBar(error, 'error-snackbar')
-      );
   }
 
 
