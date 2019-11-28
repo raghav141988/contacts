@@ -4,13 +4,13 @@ import java.util.Arrays;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Profile;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.config.annotation.web.configurers.oauth2.server.resource.OAuth2ResourceServerConfigurer;
 import org.springframework.web.cors.CorsConfiguration;
-
-import com.okta.spring.boot.oauth.Okta;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -24,12 +24,18 @@ public class SecurityDevConfiguration extends WebSecurityConfigurerAdapter {
 
 	 @Override
 	    protected void configure(HttpSecurity http) throws Exception{
-		 http.antMatcher("/**")  
+		 http.cors().and().csrf().disable();
+		 http.cors().configurationSource(request -> new CorsConfiguration(corsConfiguratione()));
+		// http.authorizeRequests().antMatchers(HttpMethod.OPTIONS, "/**").permitAll()
+        // .and().
+		http.antMatcher("/**")  
          .authorizeRequests()  
+         .antMatchers(HttpMethod.OPTIONS, "/**").permitAll()
          .antMatchers("/").permitAll()  
-         .anyRequest().authenticated()  
-         .and().oauth2Client()
-         .and().oauth2Login();
+         .anyRequest().authenticated();
+		
+        
+		http.oauth2ResourceServer().jwt();
      
     
 	    }

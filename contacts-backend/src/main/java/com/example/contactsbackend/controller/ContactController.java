@@ -2,15 +2,15 @@ package com.example.contactsbackend.controller;
 
 import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 
+import java.security.Principal;
 import java.util.Map;
 import java.util.Optional;
-import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
-import org.springframework.security.oauth2.core.user.OAuth2User;
+import org.springframework.security.oauth2.core.oidc.user.OidcUser;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -21,16 +21,15 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.client.RestTemplate;
 
 import com.example.contactsbackend.model.Contact;
-import com.example.contactsbackend.model.TokenRequest;
 import com.example.contactsbackend.service.ContactsService;
 
 import lombok.extern.slf4j.Slf4j;
 
 @RestController
 @Slf4j
+@RequestMapping(value = "/api/")
 
 public class ContactController {
 
@@ -38,8 +37,7 @@ public class ContactController {
 	 
 	 @Value("${okta.oauth2.client-id}")
 	    private String clientId;
-	    @Value("${okta.oauth2.client-secret}")
-	    private String clientSecret;
+	   
 	 
 	@Autowired
 
@@ -57,20 +55,6 @@ public class ContactController {
     } 
 	
 	
-	@PostMapping(path = "/token", consumes = "application/x-www-form-urlencoded")
-	public String test(String  code) {
-		 
-        TokenRequest request = new TokenRequest();
-        request.setClient_id(clientId);
-        request.setClient_secret(clientSecret);
-       request.setGrant_type("grant_type");
-       request.setScope("openid group");
-       request.setState(UUID.randomUUID().toString());
-       request.setCode(code);
-        RestTemplate restTemplate = new RestTemplate();
-        return restTemplate.postForObject( uri, request, String.class);
-	}
-	
 	
 	
 	
@@ -78,7 +62,7 @@ public class ContactController {
 	@RequestMapping("/oauthinfo")  
     @ResponseBody  
     public String oauthUserInfo(
-                              @AuthenticationPrincipal OAuth2User oauth2User) {  
+                              @AuthenticationPrincipal OidcUser oauth2User) {  
         return  
         		
             "User Name: " + oauth2User.getName() + "<br/>" +  
@@ -95,18 +79,16 @@ public class ContactController {
 	        return acc + "</div>";  
 	    }  
 	@RequestMapping(value = "/contacts", method = RequestMethod.GET)
+	 
 	@CrossOrigin(origins = "http://localhost:4200")
-	public Iterable<Contact> contacts() {
-		
+	public Iterable<Contact> contacts(@AuthenticationPrincipal Principal principal) {
+		String user=  "User Name: " + principal.getName() ;  ;
+		            
+		log.info("user::"+user);
 		return contactService.findAll();
 	}
 	
-	@PreAuthorize("hasAuthority('Admin')")  
-	@RequestMapping("/restricted")  
-	@ResponseBody  
-	public String restricted() {  
-	    return "You found the secret lair!";  
-	}
+
 	
 	@GetMapping(value = "/contacts/{id}")
 	@CrossOrigin(origins = "http://localhost:4200")
@@ -117,6 +99,7 @@ public class ContactController {
 	
 	
 	@PostMapping(value = "/contacts",  consumes =APPLICATION_JSON_VALUE)
+	@PreAuthorize("hasAuthority('Admin')")  
 	@CrossOrigin(origins = "http://localhost:4200")
 	public Contact saveContact(@RequestBody Contact contact) {
 		log.info("Contact data:: "+contact.toString());
@@ -125,6 +108,7 @@ public class ContactController {
 	
 
 	@DeleteMapping("/contacts/{id}")
+	@PreAuthorize("hasAuthority('Admin')") 
 	@CrossOrigin(origins = "http://localhost:4200")
 	public void deleteContact(@PathVariable String id) {
 		 contactService.delete(id);

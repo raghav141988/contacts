@@ -19,7 +19,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
         http.csrf().csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse()).and().
         authorizeRequests()
         .antMatchers( "/**").permitAll();
-       
+        http.oauth2ResourceServer().jwt();
     }
     
     
