@@ -1,5 +1,5 @@
 import { AdminGuard } from './admin.guard';
-import { HomeComponent } from './home/home.component';
+
 import { OktaAuthGuard } from './app.guard';
 import { EditContactComponent } from './edit-contact/edit-contact.component';
 import { NgModule } from '@angular/core';

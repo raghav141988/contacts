@@ -1,4 +1,4 @@
-import { HomeComponent } from './home/home.component';
+
 import { Routes } from '@angular/router';
 import { AuthInterceptor } from './auth.interceptor';
 import { ContactService } from './contact.service';
@@ -33,7 +33,7 @@ const oktaConfig = {
 @NgModule({
   declarations: [
     AppComponent,
-  HomeComponent,
+
     ContactListComponent,
     AddContactComponent,
     ContactFormComponent,
@@ -48,7 +48,7 @@ const oktaConfig = {
     MaterialModule,
     ReactiveFormsModule,
     HttpClientModule,
-   
+
   ],
   providers: [
     OktaAuthGuard,
