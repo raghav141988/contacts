@@ -1,5 +1,6 @@
 package com.example.contactsexternal.apigateway;
 
+
 import java.util.Collections;
 
 import org.springframework.boot.SpringApplication;
@@ -26,8 +27,8 @@ public class ContactsExternalApiGatewayApplication {
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
         CorsConfiguration config = new CorsConfiguration();
         config.setAllowCredentials(true);
-        config.setAllowedOrigins(Collections.singletonList("http;//localhost:4200"));
-        config.setAllowedOrigins(Collections.singletonList("https://dev-490248.okta.com"));
+        config.addAllowedOrigin("http://localhost:4200");
+        config.addAllowedOrigin("https://dev-490248.okta.com");
         config.setAllowedMethods(Collections.singletonList("*"));
         config.setAllowedHeaders(Collections.singletonList("*"));
         source.registerCorsConfiguration("/**", config);

@@ -43,8 +43,9 @@ public class ContactsController {
 	@GetMapping(value = "/contacts/{id}")
 	
 	public Optional<Contact> fetchContact(@PathVariable String id,@AuthenticationPrincipal Principal principal) {
+		return null;
       
-		return contactsClient.getContact(id);
+		//return contactsClient.getContact(id);
 	}
 
 	@PostMapping(value = "/contacts", consumes = APPLICATION_JSON_VALUE)
