@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  contactAPI: 'http://localhost:8080/api/contacts',
+  contactAPI: 'http://localhost:8081/api/contacts',
   studentAPI: 'http://localhost:8081/api/students'
 };
 

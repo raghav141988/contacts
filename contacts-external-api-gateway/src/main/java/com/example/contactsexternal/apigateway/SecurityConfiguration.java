@@ -1,4 +1,4 @@
-package com.example.contactsbackend;
+package com.example.contactsexternal.apigateway;
 
 import org.springframework.context.annotation.Profile;
 

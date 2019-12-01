@@ -1,4 +1,4 @@
-package com.example.contactsbackend;
+package com.example.contactsexternal.apigateway;
 
 import java.util.Arrays;
 
@@ -30,7 +30,8 @@ public class SecurityDevConfiguration extends WebSecurityConfigurerAdapter {
 		http.antMatcher("/**")  
          .authorizeRequests()  
          .antMatchers(HttpMethod.OPTIONS, "/**").permitAll()
-         .antMatchers("/").permitAll()  
+         
+         .antMatchers("/token/**").permitAll()  
          .anyRequest().authenticated();
 		
         
