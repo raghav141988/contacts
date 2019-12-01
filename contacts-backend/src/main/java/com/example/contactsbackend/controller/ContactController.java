@@ -6,6 +6,7 @@ import java.security.Principal;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -14,10 +15,10 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.contactsbackend.model.Contact;
-import com.example.contactsbackend.model.UserInfo;
 import com.example.contactsbackend.service.ContactsService;
 
 import lombok.extern.slf4j.Slf4j;
@@ -53,6 +54,7 @@ public class ContactController {
 	
 	
 	@PostMapping(value = "/contacts",  consumes =APPLICATION_JSON_VALUE)
+	@PreAuthorize("hasAuthority('Admin')")
 	public Contact saveContact(@RequestBody Contact contact,@AuthenticationPrincipal Principal userInfo) {
 		log.info("Contact data:: "+contact.toString());
 		log.info("User Name:: "+userInfo.getName());
@@ -61,8 +63,8 @@ public class ContactController {
 	
 
 	@DeleteMapping("/contacts/{id}")
-
-	public void deleteContact(@PathVariable String id,@AuthenticationPrincipal Principal userInfo) {
+	@PreAuthorize("hasAuthority('Admin')")
+	public @ResponseBody void deleteContact(@PathVariable String id,@AuthenticationPrincipal Principal userInfo) {
 		 contactService.delete(id);
 		
 	}
