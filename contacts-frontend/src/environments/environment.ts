@@ -4,8 +4,8 @@
 
 export const environment = {
   production: false,
-  contactAPI: 'http://35.222.131.185/api/contacts',
-  studentAPI: 'http://35.222.131.185/api/students'
+  contactAPI: 'http://35.222.131.185/contacts',
+  studentAPI: 'http://35.222.131.185/students'
 };
 
 /*
