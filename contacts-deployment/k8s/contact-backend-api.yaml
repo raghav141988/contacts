@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: 'contact-backend-api-deployment'
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      component: contacts-backend-api
+  template:
+    metadata:
+      labels:
+        component: contacts-backend-api
+    spec:
+        containers:
+          - name: contacts-backend-api
+            image: raghav141988/contacts-external-api-gateway
+            ports:
+              - containerPort: 8081
+            
+            

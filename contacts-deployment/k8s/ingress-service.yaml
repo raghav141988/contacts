@@ -15,6 +15,11 @@ spec:
             backend:
               serviceName: contact-frontend-cluster-ip-service
               servicePort: 4200
+          - path: /backend-api/?(.*)
+          # UPDATE THIS LINE ABOVE
+            backend:
+              serviceName: contact-backend-api-server-cluster-ip
+              servicePort: 8081
           - path: /backend/?(.*)
           # UPDATE THIS LINE ABOVE
             backend:

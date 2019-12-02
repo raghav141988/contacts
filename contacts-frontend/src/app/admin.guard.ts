@@ -20,7 +20,7 @@ export class AdminGuard implements CanActivate {
     this.user = await this.okta.getUser();
 
     const result = this.user.groups.find((group) => group === 'Admin');
-
+console.log(result);
 
     if (result) {
         return true;

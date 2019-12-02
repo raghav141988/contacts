@@ -13,7 +13,11 @@ const routes: Routes = [
   { path: 'contact-list',
   canActivate: [ OktaAuthGuard ],
   component: ContactListComponent, data: { animation: 'contacts' } },
-  { path: 'contact', canActivate: [ OktaAuthGuard, AdminGuard ],     component: EditContactComponent, data: { animation: 'contact' } },
+
+  { path: 'contact',
+    canActivate: [ OktaAuthGuard, AdminGuard ], 
+    component: EditContactComponent, 
+    data: { animation: 'contact' } },
 
   {
     path: 'implicit/callback',
