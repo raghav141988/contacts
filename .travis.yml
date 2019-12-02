@@ -26,6 +26,7 @@ before_install:
   
 script:
   - mvn -f contacts-backend/pom.xml clean verify -P prod
+  - mvn -f contacts-external-api-gateway/pom.xml clean verify -P prod
   
   
 deploy:
