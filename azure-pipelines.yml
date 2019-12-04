@@ -27,6 +27,17 @@ steps:
     effectivePomSkip: false
     sonarQubeRunAnalysis: false
 
+- task: Maven@3
+  inputs:
+    mavenPomFile: 'contacts-external-api-gateway/pom.xml'
+    goals: 'clean verify'
+    publishJUnitResults: false
+    javaHomeOption: 'JDKVersion'
+    mavenVersionOption: 'Default'
+    mavenAuthenticateFeed: false
+    effectivePomSkip: false
+    sonarQubeRunAnalysis: false
+
 - task: Docker@2
   inputs:
     containerRegistry: 'Docker-raghav141988'
@@ -34,6 +45,17 @@ steps:
     command: 'buildAndPush'
     Dockerfile: './contacts-backend/Dockerfile'
     buildContext: './contacts-backend'
+    tags: |
+      latest
+      $(Build.BuildId)
+
+- task: Docker@2
+  inputs:
+    containerRegistry: 'Docker-raghav141988'
+    repository: 'raghav141988/contacts-external-api-gateway'
+    command: 'buildAndPush'
+    Dockerfile: './contacts-external-api-gateway/Dockerfile'
+    buildContext: './contacts-external-api-gateway'
     tags: |
       latest
       $(Build.BuildId)
@@ -75,6 +97,16 @@ steps:
     namespace: 'kube-system'
     command: 'set'
     arguments: 'image deployment/contact-backend-deployment contacts-api=raghav141988/contacts-backend:$(Build.BuildId)'
+    secretType: 'dockerRegistry'
+    containerRegistryType: 'Container Registry'
+    dockerRegistryEndpoint: 'Docker-raghav141988'
+- task: Kubernetes@1
+  inputs:
+    connectionType: 'Kubernetes Service Connection'
+    kubernetesServiceEndpoint: 'contactsServiceConnection'
+    namespace: 'kube-system'
+    command: 'set'
+    arguments: 'image deployment/contact-contact-backend-api-deployment contacts-backend-api=raghav141988/contacts-external-api-gateway:$(Build.BuildId)'
     secretType: 'dockerRegistry'
     containerRegistryType: 'Container Registry'
     dockerRegistryEndpoint: 'Docker-raghav141988'
