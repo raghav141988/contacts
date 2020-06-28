@@ -19,14 +19,44 @@
 	</properties>
 
 	<dependencies>
+	 <dependency>
+            <groupId>com.microsoft.azure</groupId>
+            <artifactId>msal4j</artifactId>
+            <version>1.4.0</version>
+        </dependency>
+        <dependency>
+            <groupId>com.nimbusds</groupId>
+            <artifactId>oauth2-oidc-sdk</artifactId>
+            <version>6.5</version>
+        </dependency>
+           <dependency>
+            <groupId>org.springframework.security.oauth</groupId>
+            <artifactId>spring-security-oauth2</artifactId>
+            <version>2.3.6.RELEASE</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.security</groupId>
+            <artifactId>spring-security-jwt</artifactId>
+            <version>1.0.10.RELEASE</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-cache</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>com.google.guava</groupId>
+            <artifactId>guava</artifactId>
+            <version>20.0</version>
+        </dependency>
+        
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-data-mongodb</artifactId>
 		</dependency>
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-security</artifactId>
-		</dependency>
+	
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-web</artifactId>
@@ -83,6 +113,19 @@
 	<version>2.0.5</version>
 </dependency>
 <dependency>
+   <groupId>org.springframework.security</groupId>
+   <artifactId>spring-security-oauth2-client</artifactId>
+</dependency>
+<dependency>
+   <groupId>org.springframework.security</groupId>
+   <artifactId>spring-security-oauth2-jose</artifactId>
+</dependency>
+<dependency>
+    <groupId>com.microsoft.azure</groupId>
+    <artifactId>azure-active-directory-spring-boot-starter</artifactId>
+    <version>2.2.1</version>
+</dependency>
+<dependency>
     <groupId>de.bwaldvogel</groupId>
     <artifactId>mongo-java-server-h2-backend</artifactId>
     <version>1.22.0</version>
@@ -111,6 +154,14 @@
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
 			</plugin>
+			      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-surefire-plugin</artifactId>
+        <version>3.0.0-M5</version>
+        <configuration>
+          <skipTests>true</skipTests>
+        </configuration>
+      </plugin>
 		</plugins>
 		 <finalName>${project.artifactId}</finalName>
 	</build>
