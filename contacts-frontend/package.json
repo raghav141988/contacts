@@ -22,10 +22,13 @@
     "@angular/platform-browser": "~8.2.13",
     "@angular/platform-browser-dynamic": "~8.2.13",
     "@angular/router": "~8.2.13",
+    "@azure/msal-angular": "^1.0.0",
+    "core-js": "^3.6.4",
     "hammerjs": "^2.0.8",
     "rxjs": "~6.4.0",
     "tslib": "^1.10.0",
-    "zone.js": "~0.9.1"
+    "zone.js": "~0.9.1",
+    "msal": "^1.3.2"
   },
   "devDependencies": {
     "@angular-devkit/build-angular": "~0.803.18",

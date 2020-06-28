@@ -31,6 +31,7 @@ export class ContactService {
     );
   }
   getContacts(): Observable<Contact[]> {
+    console.log('getting contacts');
    return this.http.get<Contact[]>(this.contactsUrl)
    .pipe(
      catchError(this.handleError('getContacts', []))

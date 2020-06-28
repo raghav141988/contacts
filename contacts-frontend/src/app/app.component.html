@@ -1,5 +1,5 @@
-<div [@routeAnimation]="'animation'">
-  <app-header></app-header>
-  <router-outlet #routerOutlet="outlet"></router-outlet>
+<app-header></app-header>
+<div class="container">
+  <!--This is to avoid reload during acquireTokenSilent() because of hidden iframe -->
+  <router-outlet *ngIf="!isIframe"></router-outlet>
 </div>
-
