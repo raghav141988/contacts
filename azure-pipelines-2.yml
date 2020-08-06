@@ -12,7 +12,8 @@ variables:
 
   # Container registry service connection established during pipeline creation
   dockerRegistryServiceConnection: '02eee56c-8b3f-4f59-926a-3c89e4cbb6ae'
-  imageRepository: 'contacts'
+  imageBackendRepository: 'contacts-backend'
+  imageFrontendRepository: 'contacts-frontend'
   containerRegistry: 'contactsacr.azurecr.io'
   dockerfilePath: './contacts-backend/Dockerfile'
   dockerFrontendfilePath: './contacts-frontend/Dockerfile'
@@ -51,7 +52,7 @@ stages:
       displayName: Build and push Backend image to container registry
       inputs:
         command: buildAndPush
-        repository: $(imageRepository)
+        repository: $(imageBackendRepository)
         dockerfile: $(dockerfilePath)
         buildContext: ./contacts-backend
         containerRegistry: $(dockerRegistryServiceConnection)
@@ -62,7 +63,7 @@ stages:
       displayName: Build and push Front end image to container registry
       inputs:
         command: buildAndPush
-        repository: $(imageRepository)
+        repository: $(imageFrontendRepository)
         dockerfile: $(dockerFrontendfilePath)
         buildContext: ./contacts-frontend
         containerRegistry: $(dockerRegistryServiceConnection)
